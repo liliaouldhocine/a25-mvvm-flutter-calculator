@@ -14,18 +14,18 @@ MVC (Model-View-Controller)           MVVM (Model-View-ViewModel)
 └───────────┬─────────────┘          └───────────┬─────────────┘
             │                                    │
 ┌───────────▼─────────────┐          ┌───────────▼─────────────┐
-│           VIEW           │          │           VIEW           │
-│   (Build method UI)      │          │   (StatelessWidget)      │
+│           VIEW          │          │           VIEW          │
+│   (Build method UI)     │          │   (StatelessWidget)     │
 │                         │          │                         │
 │  - Affiche données      │          │  - Affiche données      │
 │  - Capture événements   │          │  - Capture événements   │
 └───────────┬─────────────┘          └───────────┬─────────────┘
             │                                    │
 ┌───────────▼─────────────┐          ┌───────────▼─────────────┐
-│          MODEL           │          │          MODEL           │
-│   (Classes de données)   │          │   (Classes de données)   │
+│          MODEL          │          │          MODEL          │
+│   (Classes de données)  │          │   (Classes de données)  │
 │                         │          │                         │
-│  - Structure données     │          │  - Structure données     │
+│  - Structure données    │          │  - Structure données    │
 │  - Pas de logique       │          │  - Pas de logique       │
 └─────────────────────────┘          └─────────────────────────┘
 ```
