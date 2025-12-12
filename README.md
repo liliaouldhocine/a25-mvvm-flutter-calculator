@@ -5,23 +5,23 @@ Absolument. Décortiquons l'architecture MVVM de cette calculatrice en détail.
 ## **1. Le Pattern MVVM : Vue d'ensemble**
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      ARCHITECTURE MVVM                      │
-├─────────────────┬─────────────────┬─────────────────────────┤
-│      VIEW       │   VIEWMODEL     │          MODEL          │
-│  (UI Layer)     │  (Logic Layer)  │     (Data Layer)        │
-├─────────────────┼─────────────────┼─────────────────────────┤
-│ calculator_     │ calculator_     │ calculation.dart        │
-│ screen.dart     │ viewmodel.dart  │                         │
-│ history_        │                 │                         │
-│ screen.dart     │                 │                         │
-├─────────────────┼─────────────────┼─────────────────────────┤
-│ - Widgets UI    │ - Business Logic│ - Data Structures       │
-│ - User Input    │ - State Management│ - Pure Data Classes    │
-│ - Display Data  │ - Data Processing│ - No Business Logic    │
-│ - No Business   │ - No UI Code    │                         │
-│   Logic         │                 │                         │
-└─────────────────┴─────────────────┴─────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│                      ARCHITECTURE MVVM                         │
+├─────────────────┬────────────────────┬─────────────────────────┤
+│      VIEW       │   VIEWMODEL        │          MODEL          │
+│  (UI Layer)     │  (Logic Layer)     │     (Data Layer)        │
+├─────────────────┼────────────────────┼─────────────────────────┤
+│ calculator_     │ calculator_        │ calculation.dart        │
+│ screen.dart     │ viewmodel.dart     │                         │
+│ history_        │                    │                         │
+│ screen.dart     │                    │                         │
+├─────────────────┼────────────────────┼─────────────────────────┤
+│ - Widgets UI    │ - Business Logic   │ - Data Structures       │
+│ - User Input    │ - State Management │ - Pure Data Classes     │
+│ - Display Data  │ - Data Processing  │ - No Business Logic     │
+│ - No Business   │ - No UI Code       │                         │
+│   Logic         │                    │                         │
+└─────────────────┴────────────────────┴─────────────────────────┘
 ```
 
 ## **2. Le MODÈLE (Models/calculation.dart)**
