@@ -11,6 +11,11 @@ class CalculatorViewModel extends ChangeNotifier {
   String get display => _display;
   List<Calculation> get history => List.unmodifiable(_history);
 
+  List<Calculation> get lastFiveHistory {
+    final start = _history.length > 5 ? _history.length - 5 : 0;
+    return List.unmodifiable(_history.sublist(start));
+  }
+
   void inputNumber(String number) {
     if (_display == '0' || _pendingOperation.isNotEmpty) {
       _display = number;
