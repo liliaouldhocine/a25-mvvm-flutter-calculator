@@ -99,8 +99,12 @@ class CalculatorScreen extends StatelessWidget {
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '%', 'color': Colors.purple, 'action': 'percentage'},
       ],
     ];
+
+    // juste au dessu a la ligne 102 pour le bouton %
+    // ===================
 
     return buttonLayout.map((row) {
       return Expanded(
@@ -135,6 +139,9 @@ class CalculatorScreen extends StatelessWidget {
     }).toList();
   }
 
+
+// ================================== ajout d'un case pour le % et apeller notre fonction calculatePercentage()
+
   void _handleButtonPress(
       Map<String, dynamic> button, CalculatorViewModel viewModel) {
     final text = button['text'];
@@ -158,6 +165,9 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+      case 'percentage':
+        viewModel.calculatePercentage();
         break;
     }
   }

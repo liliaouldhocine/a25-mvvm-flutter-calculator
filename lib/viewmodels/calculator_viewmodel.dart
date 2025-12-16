@@ -102,6 +102,26 @@ class CalculatorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
+// ============================================================
+// Ajout du % DE la partie 3
+  void calculatePercentage() {
+    if (_display.isNotEmpty && _display != 'Erreur') {
+      try {
+        final value = double.parse(_display);
+        final result = value / 100;
+        _display = result.toString();
+
+      } catch (e) {
+        _display = 'Erreur';
+      }
+      notifyListeners();
+    }
+  }
+// ===================
+
+
+
   void _resetCalculator() {
     _currentInput = '';
     _pendingOperation = '';
