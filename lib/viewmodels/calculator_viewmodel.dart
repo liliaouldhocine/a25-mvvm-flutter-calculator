@@ -39,6 +39,19 @@ class CalculatorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Ajout de la fonctionnalité pour le bouton %
+  void calculatePercentage() {
+    if (_display != '0') {
+      final value = double.tryParse(_display);
+      if (value != null) {
+        final result = value / 100;
+        _display = result.toString();
+        _currentInput = _display;
+        notifyListeners();
+      }
+    }
+  }
+
   void calculateResult() {
     if (_pendingOperation.isEmpty || _currentInput.isEmpty) return;
 

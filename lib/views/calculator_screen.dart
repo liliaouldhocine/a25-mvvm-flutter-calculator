@@ -74,6 +74,7 @@ class CalculatorScreen extends StatelessWidget {
     const List<List<Map<String, dynamic>>> buttonLayout = [
       [
         {'text': 'C', 'color': Colors.red, 'action': 'clear'},
+        {'text': '%', 'color': Colors.purple, 'action': 'percent'}, // Bouton %
         {'text': '⌫', 'color': Colors.orange, 'action': 'delete'},
         {'text': '÷', 'color': Colors.blue, 'action': 'operation'},
         {'text': '×', 'color': Colors.blue, 'action': 'operation'},
@@ -158,6 +159,9 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+      case 'percent': // Appelle de la fonction pour le bouton %
+        viewModel.calculatePercentage();
         break;
     }
   }
