@@ -99,6 +99,7 @@ class CalculatorScreen extends StatelessWidget {
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '%', 'color': Colors.blue, 'action': 'operation'},
       ],
     ];
 
