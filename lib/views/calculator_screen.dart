@@ -29,7 +29,7 @@ class CalculatorScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Affichage
+          // Affichage + historique (5 derniers calculs)
           Expanded(
             flex: 1,
             child: Container(
@@ -39,6 +39,26 @@ class CalculatorScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  // ✅ Historique des 5 derniers calculs (Option 2)
+                  if (viewModel.lastFiveHistory.isNotEmpty)
+                    Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: viewModel.lastFiveHistory.reversed.map((c) {
+                          return Text(
+                            '${c.expression} = ${c.result}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
+                  // Affichage principal
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     reverse: true,
@@ -54,6 +74,7 @@ class CalculatorScreen extends StatelessWidget {
               ),
             ),
           ),
+
           // Clavier
           Expanded(
             flex: 2,
