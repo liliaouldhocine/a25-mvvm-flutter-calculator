@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calculatrice_mvvm/viewmodels/calculator_viewmodel.dart';
 import 'package:calculatrice_mvvm/views/calculator_screen.dart';
+import 'package:calculatrice_mvvm/viewmodels/settings_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -12,16 +13,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CalculatorViewModel(),
-      child: MaterialApp(
-        title: 'Calculatrice MVVM',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
-        ),
-        home: const CalculatorScreen(),
-        debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CalculatorViewModel()),
+        ChangeNotifierProvider(create: (_) => SettingsViewModel()),
+      ],
+      child: Consumer<SettingsViewModel>(
+        builder: (context, settings, _) {
+          return MaterialApp(
+            title: 'Calculatrice MVVM',
+            // Thème clair
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+              useMaterial3: true,
+              brightness: Brightness.light,
+            ),
+            // Thème sombre
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.deepPurple, brightness: Brightness.dark),
+              useMaterial3: true,
+              brightness: Brightness.dark,
+            ),
+            // Piloté par SettingsViewModel
+            themeMode: settings.themeMode,
+            home: const CalculatorScreen(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }

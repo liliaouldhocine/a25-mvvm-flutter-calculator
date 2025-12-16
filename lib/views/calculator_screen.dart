@@ -1,3 +1,4 @@
+import 'package:calculatrice_mvvm/views/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/calculator_viewmodel.dart';
@@ -14,6 +15,7 @@ class CalculatorScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Calculatrice MVVM'),
         actions: [
+          // Button to History Page
           IconButton(
             icon: const Icon(Icons.history),
             onPressed: () {
@@ -25,6 +27,16 @@ class CalculatorScreen extends StatelessWidget {
               );
             },
           ),
+          // Button to Settings Page
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
+          )
         ],
       ),
       body: Column(
