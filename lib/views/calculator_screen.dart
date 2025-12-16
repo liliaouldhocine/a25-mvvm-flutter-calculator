@@ -72,33 +72,37 @@ class CalculatorScreen extends StatelessWidget {
   List<Widget> _buildKeyboard(
       BuildContext context, CalculatorViewModel viewModel) {
     const List<List<Map<String, dynamic>>> buttonLayout = [
+      // Première rangée : ajout du bouton % pour le calcul de pourcentage
+      // Choix architectural : le bouton % est placé avec les opérations
+      // car il modifie la valeur affichée (logique métier gérée par le ViewModel)
       [
         {'text': 'C', 'color': Colors.red, 'action': 'clear'},
         {'text': '⌫', 'color': Colors.orange, 'action': 'delete'},
+        {'text': '%', 'color': Colors.purple, 'action': 'percentage'},
         {'text': '÷', 'color': Colors.blue, 'action': 'operation'},
-        {'text': '×', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '7', 'color': Colors.grey, 'action': 'number'},
         {'text': '8', 'color': Colors.grey, 'action': 'number'},
         {'text': '9', 'color': Colors.grey, 'action': 'number'},
-        {'text': '-', 'color': Colors.blue, 'action': 'operation'},
+        {'text': '×', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '4', 'color': Colors.grey, 'action': 'number'},
         {'text': '5', 'color': Colors.grey, 'action': 'number'},
         {'text': '6', 'color': Colors.grey, 'action': 'number'},
-        {'text': '+', 'color': Colors.blue, 'action': 'operation'},
+        {'text': '-', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '1', 'color': Colors.grey, 'action': 'number'},
         {'text': '2', 'color': Colors.grey, 'action': 'number'},
         {'text': '3', 'color': Colors.grey, 'action': 'number'},
-        {'text': '=', 'color': Colors.green, 'action': 'equals', 'flex': 1},
+        {'text': '+', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '=', 'color': Colors.green, 'action': 'equals'},
       ],
     ];
 
@@ -158,6 +162,11 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+      // Gestion du bouton pourcentage - appelle la méthode du ViewModel
+      // Respecte MVVM : la View délègue la logique au ViewModel
+      case 'percentage':
+        viewModel.percentage();
         break;
     }
   }
