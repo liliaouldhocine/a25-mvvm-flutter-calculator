@@ -99,6 +99,8 @@ class CalculatorScreen extends StatelessWidget {
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': 'MR', 'color': Colors.blueGrey, 'action': 'memory_recall'},
+        {'text': 'M+', 'color': Colors.blueGrey, 'action': 'memory_add'},
       ],
     ];
 
@@ -158,6 +160,18 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+      case 'memory_add':
+        viewModel.addToMemory();
+        break;
+      case 'memory_recall':
+        viewModel.recallMemory();
+        break;
+      case 'memory_clear':
+        viewModel.clearMemory();
+        break;
+      case 'memory_subtract':
+        viewModel.subtractFromMemory();
         break;
     }
   }
