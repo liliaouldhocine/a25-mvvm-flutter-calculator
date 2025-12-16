@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/calculator_viewmodel.dart';
 import 'history_screen.dart';
+import '../viewmodels/settings_viewmodel.dart';
 
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen({super.key});
@@ -14,6 +15,15 @@ class CalculatorScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Calculatrice MVVM'),
         actions: [
+          // 🌙 Bouton mode nuit
+          IconButton(
+            icon: const Icon(Icons.dark_mode),
+            onPressed: () {
+              context.read<SettingsViewModel>().toggleDarkMode();
+            },
+          ),
+
+          // ⏱️ Historique
           IconButton(
             icon: const Icon(Icons.history),
             onPressed: () {
