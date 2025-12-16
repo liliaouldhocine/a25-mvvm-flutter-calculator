@@ -29,6 +29,42 @@ class CalculatorScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          // Option 2: Recent history display (last 5 calculations)
+          Expanded(
+            flex: 1,
+            child: Consumer<CalculatorViewModel>(
+              builder: (context, viewModel, child) {
+                final recentHistory = viewModel.recentHistory;
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (recentHistory.isNotEmpty)
+                        Text(
+                          'Historique (${recentHistory.length})',
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      Expanded(
+                        child: recentHistory.isEmpty
+                            ? const SizedBox()
+                            : ListView.builder(
+                                itemCount: recentHistory.length,
+                                itemBuilder: (context, index) {
+                                  final calc = recentHistory[index];
+                                  return Text(
+                                    '${calc.expression} = ${calc.result}',
+                                    style: const TextStyle(fontSize: 12),
+                                  );
+                                },
+                              ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
           // Affichage
           Expanded(
             flex: 1,

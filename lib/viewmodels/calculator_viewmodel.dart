@@ -7,9 +7,21 @@ class CalculatorViewModel extends ChangeNotifier {
   String _pendingOperation = '';
   double _storedValue = 0;
   final List<Calculation> _history = [];
+  
+  // Option 2: Limit history display to 5 items
+  static const int maxHistoryDisplay = 5;
 
   String get display => _display;
   List<Calculation> get history => List.unmodifiable(_history);
+  
+  // Option 2: New getter for recent history (last 5 items)
+  List<Calculation> get recentHistory {
+    if (_history.isEmpty) return [];
+    int start = (_history.length > maxHistoryDisplay) 
+        ? _history.length - maxHistoryDisplay 
+        : 0;
+    return List.unmodifiable(_history.sublist(start));
+  }
 
   void inputNumber(String number) {
     if (_display == '0' || _pendingOperation.isNotEmpty) {
