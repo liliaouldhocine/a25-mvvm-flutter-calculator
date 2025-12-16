@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/calculator_viewmodel.dart';
 import 'history_screen.dart';
+import 'settings_screen.dart';
 
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen({super.key});
@@ -21,6 +22,20 @@ class CalculatorScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const HistoryScreen(),
+                ),
+              );
+            },
+          ),
+          // Bouton paramètres - Navigation vers SettingsScreen (Option 3 - Mode Nuit)
+          // L'icône settings est standard pour accéder aux paramètres
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Paramètres',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
                 ),
               );
             },
