@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/calculator_viewmodel.dart';
 import 'history_screen.dart';
+import 'settings_screen.dart';
 
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen({super.key});
@@ -14,6 +15,7 @@ class CalculatorScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Calculatrice MVVM'),
         actions: [
+          // Bouton pour accéder à l'historique (existant)
           IconButton(
             icon: const Icon(Icons.history),
             onPressed: () {
@@ -21,6 +23,19 @@ class CalculatorScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const HistoryScreen(),
+                ),
+              );
+            },
+          ),
+          // Nouveau bouton pour accéder aux paramètres
+          // Respecte l'architecture MVVM : la View ne fait que naviguer
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
                 ),
               );
             },
