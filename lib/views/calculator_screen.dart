@@ -73,32 +73,34 @@ class CalculatorScreen extends StatelessWidget {
       BuildContext context, CalculatorViewModel viewModel) {
     const List<List<Map<String, dynamic>>> buttonLayout = [
       [
+        {'text': 'M+', 'color': Colors.purple, 'action': 'memoryAdd'},
+        {'text': 'MR', 'color': Colors.purple, 'action': 'memoryRecall'},
         {'text': 'C', 'color': Colors.red, 'action': 'clear'},
         {'text': '⌫', 'color': Colors.orange, 'action': 'delete'},
-        {'text': '÷', 'color': Colors.blue, 'action': 'operation'},
-        {'text': '×', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '7', 'color': Colors.grey, 'action': 'number'},
         {'text': '8', 'color': Colors.grey, 'action': 'number'},
         {'text': '9', 'color': Colors.grey, 'action': 'number'},
-        {'text': '-', 'color': Colors.blue, 'action': 'operation'},
+        {'text': '÷', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '4', 'color': Colors.grey, 'action': 'number'},
         {'text': '5', 'color': Colors.grey, 'action': 'number'},
         {'text': '6', 'color': Colors.grey, 'action': 'number'},
-        {'text': '+', 'color': Colors.blue, 'action': 'operation'},
+        {'text': '×', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '1', 'color': Colors.grey, 'action': 'number'},
         {'text': '2', 'color': Colors.grey, 'action': 'number'},
         {'text': '3', 'color': Colors.grey, 'action': 'number'},
-        {'text': '=', 'color': Colors.green, 'action': 'equals', 'flex': 1},
+        {'text': '-', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '+', 'color': Colors.blue, 'action': 'operation'},
+        {'text': '=', 'color': Colors.green, 'action': 'equals'},
       ],
     ];
 
@@ -158,6 +160,12 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+      case 'memoryAdd':
+        viewModel.memoryAdd();
+        break;
+      case 'memoryRecall':
+        viewModel.memoryRecall();
         break;
     }
   }

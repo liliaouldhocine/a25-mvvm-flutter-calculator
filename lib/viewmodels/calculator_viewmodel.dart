@@ -7,9 +7,11 @@ class CalculatorViewModel extends ChangeNotifier {
   String _pendingOperation = '';
   double _storedValue = 0;
   final List<Calculation> _history = [];
+  double? _memory; // Nouvelle variable pour la mémoire
 
   String get display => _display;
   List<Calculation> get history => List.unmodifiable(_history);
+  double? get memory => _memory; // Getter pour la mémoire
 
   void inputNumber(String number) {
     if (_display == '0' || _pendingOperation.isNotEmpty) {
@@ -100,6 +102,25 @@ class CalculatorViewModel extends ChangeNotifier {
   void clearHistory() {
     _history.clear();
     notifyListeners();
+  }
+
+  // Méthode pour sauvergarder le nombre dans la mémoire
+  void memoryAdd() {
+    if (_currentInput.isNotEmpty) {
+      _memory = (_memory ?? 0) + double.parse(_currentInput);
+    } else if (_display != '0') {
+      _memory = (_memory ?? 0) + double.parse(_display);
+    }
+    notifyListeners();
+  }
+
+  // Méthode pour rappeler le nombre de la mémoire
+  void memoryRecall() {
+    if (_memory != null) {
+      _display = _memory.toString();
+      _currentInput = _display;
+      notifyListeners();
+    }
   }
 
   void _resetCalculator() {
