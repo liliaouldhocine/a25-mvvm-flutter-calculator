@@ -1,3 +1,4 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:calculatrice_mvvm/viewmodels/calculator_viewmodel.dart';
 import 'package:calculatrice_mvvm/views/calculator_screen.dart';
