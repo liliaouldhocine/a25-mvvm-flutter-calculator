@@ -94,42 +94,51 @@ class CalculatorScreen extends StatelessWidget {
         {'text': '1', 'color': Colors.grey, 'action': 'number'},
         {'text': '2', 'color': Colors.grey, 'action': 'number'},
         {'text': '3', 'color': Colors.grey, 'action': 'number'},
-        {'text': '=', 'color': Colors.green, 'action': 'equals', 'flex': 1},
+        {'text': '=', 'color': Colors.green, 'action': 'equals'},
       ],
       [
-        {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
-        {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 1},
+        {'text': '%', 'color': Colors.orange, 'action': 'percentage', 'flex': 1},
+        {'text': '.', 'color': Colors.grey, 'action': 'decimal', 'flex': 1},
       ],
     ];
 
-    return buttonLayout.map((row) {
+    return buttonLayout.asMap().entries.map((entry) {
+      final index = entry.key;
+      final row = entry.value;
+      
       return Expanded(
         child: Row(
-          children: row.map((button) {
-            final flex = button['flex'] ?? 1;
+          children: [
+            ...row.map((button) {
+              final flex = button['flex'] ?? 1;
 
-            return Expanded(
-              flex: flex,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: ElevatedButton(
-                  onPressed: () => _handleButtonPress(button, viewModel),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: button['color'],
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.all(20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              return Expanded(
+                flex: flex,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ElevatedButton(
+                    onPressed: () => _handleButtonPress(button, viewModel),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: button['color'],
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.all(20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      button['text'],
+                      style: const TextStyle(fontSize: 24),
                     ),
                   ),
-                  child: Text(
-                    button['text'],
-                    style: const TextStyle(fontSize: 24),
-                  ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+            // Ajouter un Spacer si la dernière rangée n'a que 3 boutons
+            if (index == buttonLayout.length - 1 && row.length == 3)
+              const Expanded(flex: 1, child: SizedBox()),
+          ],
         ),
       );
     }).toList();
@@ -158,6 +167,10 @@ class CalculatorScreen extends StatelessWidget {
         break;
       case 'decimal':
         viewModel.inputDecimal();
+        break;
+        //On ajoute un nouveau cas pour calculer le pourcentage
+        case 'percentage':
+      viewModel.calculatePercentage();
         break;
     }
   }
