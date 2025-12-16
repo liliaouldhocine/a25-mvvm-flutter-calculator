@@ -55,6 +55,8 @@ class CalculatorViewModel extends ChangeNotifier {
       case '×':
         result = _storedValue * currentValue;
         break;
+      case '%':
+        result = _storedValue % currentValue;
       case '÷':
         if (currentValue != 0) {
           result = _storedValue / currentValue;
