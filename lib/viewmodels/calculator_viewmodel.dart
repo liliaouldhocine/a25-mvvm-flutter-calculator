@@ -38,6 +38,23 @@ class CalculatorViewModel extends ChangeNotifier {
     _display = '0';
     notifyListeners();
   }
+  
+  void calculatePercentage() {
+    final inputToUse = _currentInput.isNotEmpty ? _currentInput : _display;
+    if (inputToUse.isEmpty || inputToUse == '0') return;
+    
+    try {
+      final value = double.parse(inputToUse);
+      final percentage = value / 100;
+      
+      _display = percentage.toString();
+      _currentInput = _display;
+      notifyListeners();
+    } on FormatException {
+      _display = 'Erreur';
+      notifyListeners();
+    }
+  }
 
   void calculateResult() {
     if (_pendingOperation.isEmpty || _currentInput.isEmpty) return;
@@ -65,6 +82,9 @@ class CalculatorViewModel extends ChangeNotifier {
           return;
         }
         break;
+		// case '%':
+		// 	result = _storedValue * currentValue / 100;
+		// 	break;
     }
 
     final calculation = Calculation(
