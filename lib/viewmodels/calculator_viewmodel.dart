@@ -29,6 +29,39 @@ class CalculatorViewModel extends ChangeNotifier {
     }
   }
 
+//Ajout de la fonction pourcentage
+void calculatePercentage() {
+  // Si on a un nombre dans le _storedValue et un nombre dans le _currentInput, calcule le pourcentage
+  if (_storedValue != 0 && _currentInput.isNotEmpty) {
+    try {
+      final currentValue = double.parse(_currentInput);
+      final percentage = currentValue / 100;
+      final result = _storedValue * percentage;
+      
+      _display = result.toString();
+      _currentInput = _display;
+      notifyListeners();
+    } catch (e) {
+      _display = 'Erreur';
+      notifyListeners();
+    }
+  } else if (_currentInput.isNotEmpty) {
+    // S'il y a seulement un nombre dans le _currentInput, on calcule le pourcentage de ce nombre
+    try {
+      final currentValue = double.parse(_currentInput);
+      final result = currentValue / 100;
+      
+      _display = result.toString();
+      _currentInput = _display;
+      notifyListeners();
+    } catch (e) {
+      _display = 'Erreur';
+      notifyListeners();
+    }
+  }
+}
+
+
   void setOperation(String operation) {
     if (_currentInput.isNotEmpty) {
       _storedValue = double.parse(_currentInput);
