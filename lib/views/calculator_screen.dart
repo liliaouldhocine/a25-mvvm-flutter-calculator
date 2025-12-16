@@ -94,11 +94,12 @@ class CalculatorScreen extends StatelessWidget {
         {'text': '1', 'color': Colors.grey, 'action': 'number'},
         {'text': '2', 'color': Colors.grey, 'action': 'number'},
         {'text': '3', 'color': Colors.grey, 'action': 'number'},
-        {'text': '=', 'color': Colors.green, 'action': 'equals', 'flex': 1},
+		{'text': '%', 'color': Colors.blue, 'action': 'operation'},
       ],
       [
         {'text': '0', 'color': Colors.grey, 'action': 'number', 'flex': 2},
         {'text': '.', 'color': Colors.grey, 'action': 'decimal'},
+        {'text': '=', 'color': Colors.green, 'action': 'equals', 'flex': 1},
       ],
     ];
 
@@ -145,7 +146,11 @@ class CalculatorScreen extends StatelessWidget {
         viewModel.inputNumber(text);
         break;
       case 'operation':
-        viewModel.setOperation(text);
+        if (text == '%') {
+          viewModel.calculatePercentage();
+        } else {
+          viewModel.setOperation(text);
+        }
         break;
       case 'equals':
         viewModel.calculateResult();
